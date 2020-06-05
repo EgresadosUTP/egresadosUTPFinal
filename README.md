@@ -135,7 +135,15 @@ se desarrollo gracias a la [documentacion oficial](https://laravel.com/docs).
 |        | PUT|PATCH | superadmin/profile/{profile}      | superadmin.profile.update | App\Http\Controllers\SuperAdmin\ProfileController@update               | web,can:manageAdmins    |
 |        | GET|HEAD  | superadmin/profile/{profile}/edit | superadmin.profile.edit   | App\Http\Controllers\SuperAdmin\ProfileController@edit                 | web,can:manageAdmins    |
 
+## Usuarios de prueba
+- email : egresado@g.co,
+  password : 123
 
+- email : admin@g.co,
+  password : 123
+
+- email : superadmin@g.co,
+  password : 123
 
 
 ## Miembros de Equipo 
