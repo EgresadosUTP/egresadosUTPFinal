@@ -50,6 +50,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'egresado' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 
         'api' => [
             'driver' => 'token',

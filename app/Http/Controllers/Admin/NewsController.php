@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\News;
+use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -15,7 +17,14 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index');
+
+        $adminNews = User::find(auth()->id());
+        // $n = News::find(1);
+        // dd( gettype($n->tags->pluck('name')) )  ;
+        return view('admin.news.index')->with('adminNews',$adminNews->news);
+
+
+        // array_slice( $news->tags->pluck('name'), 0) 
     }
     
     /**
@@ -26,7 +35,8 @@ class NewsController extends Controller
     public function create()
     {
         //
-        return view('admin.news.create');
+        $tags = Tag::all();
+        return view('admin.news.create')->with('tags',$tags);
     }
     
     /**
@@ -37,53 +47,77 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $newsNueva = new News();
+        $newsNueva->title = $request->title;
+        $newsNueva->user_id = auth()->id();
+        $newsNueva->abst = $request->abst;
+        $newsNueva->body = $request->body;
+        $newsNueva->mediapath = $request->mediapath;
+
+        $newsNueva->save();
+        
+        // dd( $request->input('tags'));
+
+        foreach ($request->input('tags') as $key => $value) {
+            // $key will contain your article id
+            $newsNueva->tags()->attach($key);
+        }
+
+        // dd($newsNueva);
+        return redirect()->route('admin.news.index');
     }
     
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function show(News $news)
+
+
+    public function show( $news)
     {
         //
-        return view('admin.news.show');
+        $newsI = News::findOrFail($news);
+        return view('admin.news.show')->with('newsI', $newsI);
     }
     
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(News $news)
+
+
+    public function edit($news)
     {
-        //
-        return view('admin.news.edit');
+        $newsI = News::findOrFail($news);
+        
+        $tags = Tag::all();
+        return view('admin.news.edit')->with([
+            'newsI'=>$newsI,
+            'tags'=>$tags
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, News $news)
+
+
+    public function update(Request $request, $news)
     {
-        //
+        // dd($request);
+        $newsChange = News::findOrFail($news);
+        $newsChange->title = $request->title;
+        $newsChange->abst = $request->abst;
+        $newsChange->body = $request->body;
+        $newsChange->mediapath = $request->mediapath;
+
+        $newsChange->tags()->sync($request->tags);
+
+        $newsChange->update();
+        return redirect()->route('admin.news.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(News $news)
+
+
+    public function destroy($news)
     {
         //
+        $n = News::findOrFail($news);
+        $n->tags()->detach();
+        $n->delete();
+        
+        return redirect()->route('admin.news.index');
+
+        //se ejecuta desde la vista index
     }
 }

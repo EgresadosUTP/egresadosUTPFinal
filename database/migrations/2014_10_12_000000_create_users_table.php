@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             
             //Common for administrators and egresados
-            $table->bigInteger('dni')->unique()->nullable();
+            $table->string('dni')->unique()->nullable();
             $table->string('lastname')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable(); 
@@ -33,9 +33,8 @@ class CreateUsersTable extends Migration
             //common for egresado
             $table->date('birthday')->nullable();
             $table->enum('genero', ['Hombre', 'Mujer', 'Otro'])->nullable();
-            // Foreign Keys
-            // $table->unsignedBigInteger('idEgreso');
-            // $table->unsignedBigInteger('idInteres');
+            $table->string('interest')->nullable(); 
+            $table->string('egreso')->nullable(); 
         });
     }
 

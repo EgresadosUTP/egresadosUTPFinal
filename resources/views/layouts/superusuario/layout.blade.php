@@ -71,7 +71,7 @@
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Mi Perfil</a>	
+										<a class="dropdown-item" href="{{route('superadmin.profile.index')}}">Mi Perfil</a>	
 
 										<a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

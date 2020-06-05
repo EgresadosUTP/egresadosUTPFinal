@@ -72,23 +72,24 @@
 							@foreach($users as $user)
 								<tr>
 									<td>{{$user->name}}</td>
-									<td>{{$user->lastName}}</td>
+									<td>{{$user->lastname}}</td>
 									<td>{{$user->dni}}</td>
 									<td>{{$user->email}}</td>
 
 									<td>
 										<div class="form-button-action">
-											<a href="{{route('superadmin.admins.edit', $user)}}">
+											<a href="{{route('superadmin.admins.edit', $user->id)}}">
 												<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Editar">
 													<i class="fa fa-edit"></i>
 												</button>
 											</a>
-
-											<a href="{{route('superadmin.admins.destroy', $user)}}">
-												<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Eliminar">
-													<i class="fa fa-times"></i>
-												</button>
-											</a>
+										
+											<form action="{{route('superadmin.admins.destroy', $user->id)}}" method="POST" class="float-left">
+                                				@csrf
+                                				{{method_field('DELETE')}}
+                                				<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Eliminar"><i class="fa fa-times"></i></button>
+                            				</form>       
+											
 										</div>
 									</td>
 								</tr>

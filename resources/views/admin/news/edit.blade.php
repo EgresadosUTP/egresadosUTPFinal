@@ -6,51 +6,67 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Crear una nueva Noticia</h1>
-    <p class="mb-4"> Los campos que encontrarás a continuación son requeridos. Para guardar la noticia, haz click en el botón "Publicar"
-        En el campo "Resumen" agrega un pequeño párrafo que le dé una idea a tus lectores de qué se tratará la nueva Noticia.
+    <h1 class="h3 mb-2 text-gray-800"> Visualiza y/o modifica la noticia que has publicado anteriormente </h1>
+    <p class="mb-4">
+        Esta es tu noticia :
     </p>
 
     <!-- Area Chart -->
     <div class="card shadow mb-10">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Creación de una nueva Noticia</h6>
+            <h6 class="m-0 font-weight-bold text-primary"> Noticia</h6>
         </div>
 
         <div>
 
-            <div class="card-body">
+            <div class="card-body col-12">
 
-
-                <form action="" method="POST">
+                <form action="{{route('admin.news.update', $newsI->id) }}" method="POST" >
+                    @csrf
+                    {{method_field('PUT')}}
                     <div class="col form-group">
-                        <label for="pillInput">Título</label>
-                        <input type="text" class="form-control input-pill" id="dni" placeholder="El poder de las palabras... ">
+                        <label> Título </label>
+                        <input type="text" class="form-control input-pill" name="title" id="title" value=" {{ $newsI->title}}">
                     </div>
 
                     <div class="col form-group">
-                        <label for="pillInput">Resumen</label>
-                        <input type="text" class="form-control input-pill" id="dni" placeholder="Pequeño texto resumen de la noticia ">
+                        <label> Resumen </label>
+                        <input type="text" class="form-control input-pill" name="abst" id="abst" value=" {{ $newsI->abst}}">
                     </div>
 
 
 
                     <div class="col form-group">
-                        <label for="pillInput">Contenido</label>
-                        <input type="text" class="form-control input-pill" id="primerNombre" placeholder="Etiam justo augue, tristique non ipsum eu, eleifend pulvinar ipsum. Mauris bibendum nibh ut augue rhoncus, vel suscipit leo ornare. Vivamus ut est quis nunc dictum tempus id quis nunc.
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum dapibus nulla finibus diam faucibus mollis.
+                        <label> Contenido </label>
+                        <textarea name="body" class="form-control input-pill" id="body" rows="10" cols="40"> {{ $newsI->body}} </textarea>
 
-">
-                    </div>
-                    <div class="col form-group">
-                        <label for="pillInput">Media</label>
-                        <input type="text" class="form-control input-pill" id="primerApellido" placeholder="img.png">
                     </div>
 
-                    <small id="emailHelp" class="form-text text-muted">Revisa cuidadosamente la informacion antes de enviar.</small>
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <label> Contenido multimedia</label>
+                            <input type="text" class="form-control input-pill" name="mediapath" id="mediapath" value=" {{ $newsI->mediapath}}">
+                        </div>
+                        
+                        
+                        <div class="col form-group">
+                            <label> Intereses </label>
+                            @foreach($tags as $tag)
+                            <div class="form-check">
+                                <input type="checkbox" name="tags[]" value="{{$tag->id}}" @if ($newsI->tags->pluck('id')->contains($tag->id)) checked @endif >
+                                <label for=""> {{$tag->name}}</label>
+                            </div>
+                            @endforeach
+    
+                        </div>
+
+                    </div>
+
                     <div align="center">
-                        <button type="submit" class="btn btn-primary input-pill text-center">Publicar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-flag"></i> Guardar Cambios </button>
                     </div>
+
                 </form>
 
             </div>

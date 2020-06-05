@@ -2,9 +2,9 @@
 
 @section("content")
 
-<h1>Creacion de Nuevos Usuarios Administradores</h1>
+<h1>Actualizacion Usuario Administrador</h1>
 
-<form action="" method="POST">
+<form action="{{route('superadmin.admins.update',$user->id)}}" method="POST">
     @csrf
     {{method_field('PUT')}}
 
@@ -21,8 +21,8 @@
         </div>
 
         <div class="col">
-            <label for="lastName" class="col-md-2 col-form-label text-md-right"> Apellidos</label>
-            <input id="lastName" type="text" class="form-control input-pill @error('lastName') is-invalid @enderror" name="lastName" value="{{$user->lastName}}" required autofocus>
+            <label for="lastname" class="col-md-2 col-form-label text-md-right"> Apellidos</label>
+            <input id="lastname" type="text" class="form-control input-pill @error('lastname') is-invalid @enderror" name="lastname" value="{{$user->lastname}}" required autofocus>
             @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

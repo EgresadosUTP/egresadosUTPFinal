@@ -25,13 +25,20 @@ Auth::routes();
 // Conjunto de Rutas a las que accede superadmin
 Route::namespace('SuperAdmin')->prefix('superadmin')->name('superadmin.')->middleware('can:manageAdmins')->group(function(){
     Route::resource('/admins', 'AdminController');
-    Route::resource('/profile', 'ProfileController', ['except' =>['create', 'destroy','show', 'store']]);
+    Route::resource('/profile', 'ProfileController', ['except' =>['create', 'destroy', 'store', 'show']]);
 });
 
-// Conjunto de Rutas a las que accede superadmin
+// Conjunto de Rutas a las que accede admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manageEgresados')->group(function(){
     Route::resource('/egresados', 'EgresadosController', ['except' =>['create', 'store', 'update', 'edit']]);
     Route::resource('/profile', 'ProfileController', ['except' =>['create', 'destroy','index', 'store']]);
     Route::resource('/news', 'NewsController');
 });
 
+// Conjunto de Rutas a las que accede egresado
+Route::namespace('Egresado')->prefix('egresado')->name('egresado.')->middleware('can:egresado')->group(function(){
+    Route::resource('/friends', 'FriendsController', ['except' =>['create', 'update','edit']]);
+    Route::resource('/profile', 'ProfileController', ['except' =>['create', 'destroy','index', 'store']]);
+    Route::resource('/news', 'NewsController', ['only'=>['show']]);
+    Route::resource('/interest', 'InterestController', ['only'=>['edit', 'update']]);
+});

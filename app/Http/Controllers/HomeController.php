@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\News;
+use App\Tag;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,7 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+    //    $t='educacion';
+       $t= auth()->user()->interest ;
+
+       $news = News::whereHas('tags', function ($query) use ($t) {
+          $query->where('name', $t);
+        })->get();
+
+        $tags = Tag::all();
+
+        return view('home')->with([
+            'news'=>$news,
+            'tags'=> $tags
+            ]);
     }
 
 }

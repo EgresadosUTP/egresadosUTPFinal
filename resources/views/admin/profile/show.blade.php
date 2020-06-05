@@ -1,5 +1,8 @@
 @extends('layouts.admin.layout')
 
+
+<!-- admin profile show.blade -->
+
 @section('content')
 
 <!-- Begin Page Content -->
@@ -28,13 +31,13 @@
           <form action="" method="POST">
                 <div class="row">
                     <div class="col form-group">
-                        <label for="pillInput">Cedula o DNI</label>
-                        <input type="text" class="form-control input-pill" id="dni" placeholder="12345.." disabled>
+                        <label for="dni">Cedula o DNI</label>
+                        <input type="text" class="form-control input-pill" id="dni" value="{{auth()->user()->dni}}" disabled>
                     </div>
 
                     <div class="col form-group">
                         <label for="email">Direccion de Correo</label>
-                        <input type="email" class="form-control input-pill" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@magic.co" disabled>
+                        <input type="email" class="form-control input-pill" id="email" aria-describedby="emailHelp" value="{{auth()->user()->email}}" disabled>
                     </div>
 
                 </div>
@@ -42,24 +45,32 @@
                 <div class="row">
                     <div class="col form-group">
                         <label for="pillInput">Nombres</label>
-                        <input type="text" class="form-control input-pill" id="primerNombre" placeholder="ej: Pepito" disabled>
+                        <input type="text" class="form-control input-pill" id="name" value="{{auth()->user()->name}}" disabled>
                     </div>
                     <div class="col form-group">
-                        <label for="pillInput">Apellidos</label>
-                        <input type="text" class="form-control input-pill" id="primerApellido" placeholder="ej: Perez" disabled>
+                        <label for="lastname">Apellidos</label>
+                        <input type="text" class="form-control input-pill" id="lastname" value="{{auth()->user()->lastname}}" disabled>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col form-group">
-                        <label for="direccion">Telefono</label>
-                        <input type="text" class="form-control input-pill" id="direccion" placeholder="tel:312312313" disabled>
+                        <label for="phone">Telefono</label>
+                        <input type="text" class="form-control input-pill" id="phone" value="{{auth()->user()->phone}}" disabled>
                     </div>
                     <div class="col form-group">
-	            	        <label for="direccion">Direccion Fisica</label>
-	            	        <input type="text" class="form-control input-pill" id="direccion" value="Cll 13 #123-213" disabled>
+	            	        <label for="address">Direccion Fisica</label>
+	            	        <input type="text" class="form-control input-pill" id="address" value="{{auth()->user()->address}}" disabled>
                     </div>
                 </div>
+
+                <div class="row">
+                <div class="col form-group">
+                  <label for="password"> Contraseña</label>
+                  <input id="password" type="password" class="form-control input-pill @error('password') is-invalid @enderror"  autocomplete="current-password" disabled>
+                </div>
+
+              </div>
 
           </form>
           
@@ -68,7 +79,7 @@
         <div align="center">
           <!-- Button Change profile Photo -->
           
-          <a href="#" class="btn btn-primary btn-icon-split" style="margin-bottom: 20px;">
+          <a href="{{route('admin.profile.edit', auth()->id() )}}" class="btn btn-primary btn-icon-split" style="margin-bottom: 20px;">
             <span class="icon text-white-50">
               <i class="fas fa-flag"></i>
             </span>
@@ -87,7 +98,7 @@
     <div class="card shadow mb-4">
       <!-- Card Header - Dropdown -->
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">César Jaramillo</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{ auth()->user()->name}} </h6>
       </div>
       
       

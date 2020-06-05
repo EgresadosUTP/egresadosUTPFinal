@@ -49,6 +49,10 @@ body {
   overflow-y: auto;
   font-family: "OpenSans-Regular";
 }
+form .error {
+  color:black;
+  font-weight: bold;
+}
 
 @media (min-width: 1200px) {
   .container {

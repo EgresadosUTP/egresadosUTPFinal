@@ -6,7 +6,7 @@
 
 <form action="{{route('superadmin.admins.store')}}" method="POST">
     @csrf
-
+    {{method_field('POST')}}
     <div class="form-group row">
 
         <div class="col">
@@ -20,8 +20,8 @@
         </div>
 
         <div class="col">
-            <label for="lastName" class="col-md-2 col-form-label text-md-right"> Apellidos</label>
-            <input id="lastName" type="text" class="form-control input-pill @error('lastName') is-invalid @enderror" name="lastName" required autofocus>
+            <label for="lastname" class="col-md-2 col-form-label text-md-right"> Apellidos</label>
+            <input id="lastname" type="text" class="form-control input-pill @error('lastname') is-invalid @enderror" name="lastname" required autofocus>
             @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

@@ -47,15 +47,19 @@
 <footer class="container-fluid" id="gtco-footer">
     
     <div class="col-12">
-        <p>&copy; 2020. Todos los derechos reservados. Creado por CMDE SOft</p>
+        <p>&copy; 2020. Todos los derechos reservados</p>
     </div>
 </footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/validadores/validarregistro.js"></script>
+
+
 <!-- owl carousel js-->
 <script src="/owl-carousel/owl.carousel.min.js"></script>
 <script src="/js/main.js"></script>

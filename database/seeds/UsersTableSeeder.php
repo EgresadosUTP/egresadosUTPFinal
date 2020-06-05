@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
         $superAdminRole = Role::where('name', 'superadmin')->first();
         $administratorRole = Role::where('name', 'admin')->first();
         $egresadoRole = Role::where('name', 'egresado')->first();
-        $userRole = Role::where('name', 'user')->first();
+       // $userRole = Role::where('name', 'user')->first();
 
         $superAdmin = User::create([
             'name' => 'Super Administrador', 
@@ -43,11 +43,12 @@ class UsersTableSeeder extends Seeder
         for($i=0;$i<10;$i++){
             $admininistrator = User::create([
                 'name' => $faker->name,
-                'lastName' => $faker->lastName,
+                'lastname' => $faker->lastName,
                 'dni' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'address' => $faker->unique()->address,
                 'phone' => $faker->unique()->phoneNumber,
+                'egreso'=> $faker->company,
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'), 
                 'remember_token' => Str::random(10)
@@ -64,7 +65,7 @@ class UsersTableSeeder extends Seeder
 
             $egresado = User::create([
                 'name' => $faker->name,
-                'lastName' => $faker->lastName,
+                'lastname' => $faker->lastName,
                 'dni' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'address' => $faker->unique()->address,

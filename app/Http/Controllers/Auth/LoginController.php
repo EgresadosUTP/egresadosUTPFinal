@@ -30,13 +30,14 @@ class LoginController extends Controller
     public function redirectTo()
     {
         $authRole = auth()->user()->roles()->get()->pluck('name')[0];
+        //dd($authRole); //debug
         if ($authRole == "superadmin") {
             return route('superadmin.admins.index');
 
         } else if ($authRole == "admin") {
             return route('admin.egresados.index');
         } else {
-            return '/home';
+            return route('home');
         }
     }
         

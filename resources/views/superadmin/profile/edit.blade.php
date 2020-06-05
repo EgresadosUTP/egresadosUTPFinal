@@ -37,6 +37,12 @@
 
                 </div>
 
+                <div class="col form-group" hidden>
+                  <label>Name</label hidden>
+                  <input id="name" type="name" class="form-control input-pill @error('name') is-invalid @enderror" name="name" placeholder="superadmin" required autocomplete="name" autofocus hidden>
+
+                </div hidden>
+
               </div>
 
               <div class="row">

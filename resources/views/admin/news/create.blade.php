@@ -22,35 +22,53 @@
             <div class="card-body">
 
 
-                <form action="" method="POST">
+                <form action="{{route('admin.news.store')}}" method="POST">
+                @csrf
+                    {{method_field('POST')}}
                     <div class="col form-group">
-                        <label for="pillInput">Título</label>
-                        <input type="text" class="form-control input-pill" id="dni" placeholder="El poder de las palabras... ">
+                        <label> Título </label>
+                        <input type="text" class="form-control input-pill" name="title" id="title"  required>
                     </div>
 
                     <div class="col form-group">
-                        <label for="pillInput">Resumen</label>
-                        <input type="text" class="form-control input-pill" id="dni" placeholder="Pequeño texto resumen de la noticia ">
+                        <label> Resumen </label>
+                        <input type="text" class="form-control input-pill" name="abst" id="abst"  required>
                     </div>
 
 
 
                     <div class="col form-group">
-                        <label for="pillInput">Contenido</label>
-                        <input type="text" class="form-control input-pill" id="primerNombre" placeholder="Etiam justo augue, tristique non ipsum eu, eleifend pulvinar ipsum. Mauris bibendum nibh ut augue rhoncus, vel suscipit leo ornare. Vivamus ut est quis nunc dictum tempus id quis nunc.
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum dapibus nulla finibus diam faucibus mollis.
+                        <label> Contenido </label>
+                        <textarea name="body" class="form-control input-pill" id="body" rows="10" cols="40">  </textarea>
 
-">
-                    </div>
-                    <div class="col form-group">
-                        <label for="pillInput">Media</label>
-                        <input type="text" class="form-control input-pill" id="primerApellido" placeholder="img.png">
                     </div>
 
-                    <small id="emailHelp" class="form-text text-muted">Revisa cuidadosamente la informacion antes de enviar.</small>
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <label> Contenido multimedia</label>
+                            <input type="text" class="form-control input-pill" name="mediapath" id="mediapath"  required>
+                        </div>
+                        
+                        
+                        <div class="col form-group">
+                            <label> Intereses </label>
+                            @foreach($tags as $tag)
+                            <div class="form-check">
+                                <input type="checkbox"   name="tags[{{ $tag->id }}]" >
+                                <label for=""> {{$tag->name}}</label>
+                            </div>
+                            @endforeach
+    
+                        </div>
+
+                    </div>
+
                     <div align="center">
-                        <button type="submit" class="btn btn-primary input-pill text-center">Publicar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-flag"></i> Guardar Noticia </button>
+
                     </div>
+
                 </form>
 
             </div>
